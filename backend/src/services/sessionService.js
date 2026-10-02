@@ -14,12 +14,37 @@ export async function createSession(){
         const now = Date.now();
 
         try{
-            await sessionsCol().doc(code).create({
+            await sessionsCol().doc(code).create({ //creates a new session
                 createdAt: Timestamp.fromMillis(now),
                 expiredAt: Timestamp.fromMillis(now+ttlMs),
                 seq: 0,
             });
 
+            return {code, expiresAt: now + ttlMs};
+        }catch (err){
+            if(err.code===ALREADY_EXISTS) continue;
+            throw err;
         }
     }
+
+    throw new Error('Could not allocate a pairing code');
+}
+
+// allow expired is used for sessions which are still active
+export async function getActiveSession(rawCode, {allowExpired = false}={}){
+    const code = normalizeCode(rawCode);
+    if(!isValidCode(code, config.session.codeLength)) return null;
+
+    const snap = await sessionCol.doc(code).get();
+    if(!snap.exists) return null;
+
+    const expiresAt = snap.get('expiresAt').toMillis();
+    if(!allowExpired && expiresAt <= Date.now()) return null;
+    return { code, expiresAt };
+}
+
+export async function touchSession(code) {
+  const expiresAt = Date.now() + config.session.ttlMs;
+  await sessionsCol().doc(code).update({ expiresAt: Timestamp.fromMillis(expiresAt) });
+  return expiresAt;
 }

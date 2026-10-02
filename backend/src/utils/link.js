@@ -1,6 +1,6 @@
 // Checks whether the content is a link or a text
 
-export function detect(content){
+export function detectKind(content){
     const val = content.trim();
 
     if(/\s/.test(val)) return 'text'; //checks for any whitespace character
