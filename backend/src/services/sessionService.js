@@ -20,7 +20,6 @@ export async function createSession(){
                 seq: 0,
             });
 
-            return { code,}
         }
     }
 }
