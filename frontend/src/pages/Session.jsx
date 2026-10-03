@@ -1,4 +1,4 @@
-import { useUniClip } from '../hooks/useUniClip.js';
+import { useUniClip } from '../hooks/useUniclip.js';
 import Header from '../components/Header.jsx';
 import PairingCode from '../components/PairingCode.jsx';
 import ConnectionStatus from '../components/ConnectionStatus.jsx';
