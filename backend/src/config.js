@@ -8,13 +8,13 @@ const int = (value, fallback) => {
 
 export const config = {
   port: int(process.env.PORT, 8000), // Check if port is mentioned in env file or use 8000
-  corsOrigin: (process.env.CORS_ORIGIN ?? "http://localhost:5173") // origin for react/vite frontend
+  corsOrigins: (process.env.CORS_ORIGIN ?? "http://localhost:5173") // origin for react/vite frontend
     .split(",") // splits multiple origin
     .map((s) => s.trim()) // used to trim any waste spaces
     .filter(Boolean), // used to remove empty strings
   firebase: {
-    projectID: process.env.FIREBASE_PROJECT_ID,
-    serviceAccountJson: process.env.FIREBASE_SERVIVE_ACCOUNT_JSON,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    serviceAccountJson: process.env.FIREBASE_SERVICE_ACCOUNT_JSON,
   },
   session: {
     ttlMs: int(process.env.SESSION_TTL_MINUTES, 60) * 60_000,

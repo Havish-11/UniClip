@@ -16,7 +16,7 @@ export async function createSession(){
         try{
             await sessionsCol().doc(code).create({ //creates a new session
                 createdAt: Timestamp.fromMillis(now),
-                expiredAt: Timestamp.fromMillis(now+ttlMs),
+                expiresAt: Timestamp.fromMillis(now+ttlMs),
                 seq: 0,
             });
 
@@ -35,7 +35,7 @@ export async function getActiveSession(rawCode, {allowExpired = false}={}){
     const code = normalizeCode(rawCode);
     if(!isValidCode(code, config.session.codeLength)) return null;
 
-    const snap = await sessionCol.doc(code).get();
+    const snap = await sessionCol().doc(code).get();
     if(!snap.exists) return null;
 
     const expiresAt = snap.get('expiresAt').toMillis();
