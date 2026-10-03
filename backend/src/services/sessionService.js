@@ -35,7 +35,7 @@ export async function getActiveSession(rawCode, {allowExpired = false}={}){
     const code = normalizeCode(rawCode);
     if(!isValidCode(code, config.session.codeLength)) return null;
 
-    const snap = await sessionCol().doc(code).get();
+    const snap = await sessionsCol().doc(code).get();
     if(!snap.exists) return null;
 
     const expiresAt = snap.get('expiresAt').toMillis();
