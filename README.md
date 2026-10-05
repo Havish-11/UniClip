@@ -36,6 +36,8 @@ Device A ──┐                      ┌── Device B
 Device C ──┘                      └── Device D
 ```
 
+Video Demonstration: <https://drive.google.com/file/d/1ahlORnkgInD9hA0-wO9XYuU1SmvXW4No/view?usp=sharing>
+
 ## Project Structure
 
 ```
