@@ -66,7 +66,7 @@ UniClip/
 ### 1. Clone
 
 ```bash
-git clone https://github.com/Havish-11/UniClip.git
+git clone https://github.com/Havish-11/UniClip
 cd UniClip
 ```
 
